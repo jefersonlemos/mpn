@@ -8,6 +8,6 @@ node('slaves'){
     }
 
     stage('Test'){
-        sh 'echo teste'
+        sh 'echo branch teste'
     }
 }
