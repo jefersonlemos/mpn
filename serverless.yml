@@ -1,0 +1,49 @@
+service: simple-node-endpoint
+
+frameworkVersion: '>=1.0.0 <2.0.0'
+
+package:
+  individually: true
+
+plugins:
+  #- serverless-plugin-typescript
+  # - serverless-plugin-optimize
+  #- serverless-plugin-reducer
+  # - serverless-plugin-split-stacks
+
+provider:
+  name: aws
+  region: ${opt:region, 'us-east-1'}
+  role: 'arn:aws:iam::781831358555:role/eng-roles/dev-mpn_role'
+  #role: ${ssm:${self:provider.stage}-mpn_iam_role}
+  runtime: nodejs12.x
+  stage: ${opt:stage}
+  versionFunctions: false # No functions versioning
+  timeout: 45
+  maximumRetryAttempts: 3
+  vpc:
+    securityGroupIds:
+      - ${ssm:${self:provider.stage}-lambda-sg}
+    subnetIds:
+      - ${ssm:${self:provider.stage}-subnet-0744eb52fd6519aa3} #dev
+      - ${ssm:${self:provider.stage}-subnet-0ffeed6a730e1ec8b} #dev
+      
+  #environment: #Global Environment variables
+   #   ${file(./_configs/env/${self:provider.stage}.yml)}
+
+#custom:
+ 
+
+functions: 
+  currentTime:
+    handler: src/handler.endpoint
+    events:
+      - http:
+          path: ping
+          method: get
+
+#resources:
+  # ApiGateway
+  #- ${file(_configs/resources/apigateway.yml)}
+
+
