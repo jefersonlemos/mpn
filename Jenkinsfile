@@ -8,7 +8,7 @@ node('master'){
     }
 
     stage('Test'){
-        sh 'echo branch de teste'
+        sh 'serverless deploy --stage dev -v'
     }
 }
 
