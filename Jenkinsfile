@@ -2,7 +2,7 @@
 // def functionName = 'Fibonacci'
 // def region = 'eu-west-3'
 
-node('slaves'){
+node('master'){
     stage('Checkout'){
         checkout scm
     }
