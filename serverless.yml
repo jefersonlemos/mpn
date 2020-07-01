@@ -21,12 +21,12 @@ provider:
   versionFunctions: false # No functions versioning
   timeout: 45
   maximumRetryAttempts: 3
-  vpc:
-    securityGroupIds:
-      - ${ssm:${self:provider.stage}-lambda-sg}
-    subnetIds:
-      - ${ssm:${self:provider.stage}-subnet-0744eb52fd6519aa3} #dev
-      - ${ssm:${self:provider.stage}-subnet-0ffeed6a730e1ec8b} #dev
+  # vpc:
+  #   securityGroupIds:
+  #     - ${ssm:${self:provider.stage}-lambda-sg}
+  #   subnetIds:
+  #     - ${ssm:${self:provider.stage}-subnet-0744eb52fd6519aa3} #dev
+  #     - ${ssm:${self:provider.stage}-subnet-0ffeed6a730e1ec8b} #dev
       
   #environment: #Global Environment variables
    #   ${file(./_configs/env/${self:provider.stage}.yml)}
